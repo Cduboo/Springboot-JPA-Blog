@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.choi.blog.model.User;
 
+import lombok.Getter;
+
+@Getter
 public class PrincipalDetail implements UserDetails {
 	private User user;
 	
@@ -60,6 +63,5 @@ public class PrincipalDetail implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
 	
 }
