@@ -32,4 +32,19 @@ public class BoardService {
 			return new IllegalArgumentException("글 상세보기 실패");
 		});
 	}
+
+	@Transactional
+	public void delete(int id) {
+		boardRepository.deleteById(id);
+	}
+
+	@Transactional
+	public void update(Board requestBoard, int id) {		
+		Board board = boardRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("글 상세보기 실패");
+		});
+		
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+	}
 }
