@@ -4,8 +4,8 @@
 <div class="container">
 	<form action="/auth/loginProc" method="post">
 		<div class="form-group">
-			<label for="username">이름:</label>
-			<input type="text" name="username" id="username" class="form-control" placeholder="Enter username">
+			<label for="username">이메일:</label>
+			<input type="text" name="email" id="email" class="form-control" placeholder="Enter username">
 		</div>
 		<div class="form-group">
 			<label for="pwd" >패스워드:</label>
@@ -15,3 +15,12 @@
 	</form>
 </div>
 <%@ include file="../layout/footer.jsp"%>
+<script>
+	let queryString = window.location.search;
+	let urlParams = new URLSearchParams(queryString);
+	let hasError = urlParams.has('error');
+	
+	if(hasError) {
+		alert('로그인 실패');
+	}
+</script>

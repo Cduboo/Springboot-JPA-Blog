@@ -10,5 +10,5 @@ import com.choi.blog.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	// SELECT * FROM user WHERE username = 1?;
-	Optional<User> findByUsername(String name);
+	Optional<User> findByEmail(String email);
 }

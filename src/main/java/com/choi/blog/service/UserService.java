@@ -17,14 +17,29 @@ public class UserService {
 	private BCryptPasswordEncoder encoder;
 	
 	@Transactional
-	public void save(User user) {
+	public User joinProc(User user) {
+		if(!userRepository.findByEmail(user.getEmail()).isEmpty()) return null;
+		
 		String rawPassword = user.getPassword();
 		String encPassword = encoder.encode(rawPassword);
 		
 		user.setPassword(encPassword);
 		user.setRole(RoleType.USER);
 		
-		userRepository.save(user);
+		return userRepository.save(user);
+	}
+
+	@Transactional
+	public void update(User requestUser) {
+		User user = userRepository.findById(requestUser.getId()).orElseThrow(() -> {
+			return new IllegalArgumentException("회원 찾기 실패");
+		});
+		
+		String rawPassword = requestUser.getPassword();
+		String encPassword = encoder.encode(rawPassword);
+		
+		user.setPassword(encPassword);
+		user.setEmail(requestUser.getEmail());
 	}
 
 }

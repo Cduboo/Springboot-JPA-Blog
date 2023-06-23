@@ -15,9 +15,9 @@ public class PrincipalDetailService implements UserDetailsService {
 	private UserRepository userRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User principal = userRepository.findByUsername(username).orElseThrow(() -> {
-			return new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다. : " + username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User principal = userRepository.findByEmail(email).orElseThrow(() -> {
+			return new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다. : " + email);
 		});
 		return new PrincipalDetail(principal); // 시큐리티 세션에 유저 정보 저장됨
 	}

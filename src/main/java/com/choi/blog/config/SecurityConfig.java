@@ -47,6 +47,7 @@ public class SecurityConfig{
 				.authenticated()
 			.and()
 				.formLogin()
+				.usernameParameter("email")
 				.loginPage("/auth/loginForm")
 				.loginProcessingUrl("/auth/loginProc") // 스프링 시큐리티가 해당 주소의 요청을 가로채 대신 로그인 해준다.
 				.defaultSuccessUrl("/");
