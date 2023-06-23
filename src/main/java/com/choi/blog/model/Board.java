@@ -3,6 +3,7 @@ package com.choi.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,13 +17,19 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OrderBy;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -45,8 +52,9 @@ public class Board {
 	@JoinColumn(name = "userId")
 	private User user; // 
 	
-	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) // FK X, JOIN
-	private List<Reply> reply;
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // FK X, JOIN
+	@JsonIgnoreProperties({"board"}) // 무한 참조 방지, Reply의 Board board
+	private List<Reply> replys;
 	
 	@CreationTimestamp
 	private Timestamp createDate;

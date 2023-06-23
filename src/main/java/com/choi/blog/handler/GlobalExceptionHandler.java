@@ -11,8 +11,8 @@ import com.choi.blog.dto.ResponseDto;
 @RestController
 public class GlobalExceptionHandler {
 	
-	@ExceptionHandler(value = IllegalArgumentException.class)
-	public ResponseDto<String> handleArgumentException(IllegalArgumentException e) {
+	@ExceptionHandler(value = Exception.class)
+	public ResponseDto<String> handleArgumentException(Exception e) {
 		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
 	}
 }
